@@ -15,6 +15,7 @@ public class Player extends Entity{
 
     public final int screenY;
     public final int screenX;
+    int hasKeys = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
 
@@ -24,7 +25,15 @@ public class Player extends Entity{
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
         screenY = gp.screenHeight/2- (gp.tileSize/2);
 
-        solidArea = new Rectangle(8, 16 ,32, 32);
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
+
 
         setDefaultValues();
         getPlayerImage();
@@ -76,6 +85,10 @@ public class Player extends Entity{
             collisionOn = false;
             gp.colissionCheckcer.checkTile(this);
 
+            //CHECK OBJECT COLLISION
+            int objectIndex = gp.colissionCheckcer.checkObject(this, true);
+            pickUpObject(objectIndex);
+
             if(collisionOn == false){
                 switch (direction){
                     case "up":
@@ -104,6 +117,26 @@ public class Player extends Entity{
             }
         }
 
+    }
+
+    public void pickUpObject(int i){
+
+        if(i != 999){
+            String objName = gp.obj[i].name;
+
+            switch (objName){
+                case "Key":
+                    hasKeys++;
+                    gp.obj[i] = null;
+                    break;
+                case "Doors":
+                    if(hasKeys > 0){
+                        gp.obj[i] = null;
+                        hasKeys--;
+                    }
+                    break;
+            }
+        }
     }
 
     public void draw(Graphics2D g2){
