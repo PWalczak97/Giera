@@ -15,7 +15,7 @@ public class Player extends Entity{
 
     public final int screenY;
     public final int screenX;
-    int hasKeys = 0;
+    public int hasKeys = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
 
@@ -135,12 +135,19 @@ public class Player extends Entity{
                         gp.playSoundEffect(3);
                         gp.obj[i] = null;
                         hasKeys--;
+                    } else {
+                        gp.ui.showMessage("Potrzebujesz klucza!");
                     }
                     break;
                 case "Boots":
                     gp.playSoundEffect(2);
                     speed += 2;
                     gp.obj[i] = null;
+                    break;
+                case "Chest":
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSoundEffect(4);
                     break;
             }
         }
