@@ -2,11 +2,13 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Player extends Entity{
@@ -48,23 +50,31 @@ public class Player extends Entity{
 
     public void getPlayerImage(){
 
-        try {
-            up1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_back1.png"));
-            up2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_back2.png"));
-            down1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_front1.png"));
-            down2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_front2.png"));
-            left1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_left1.png"));
-            left2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_left2.png"));
-            right1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_right1.png"));
-            right2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_right2.png"));
-            standFront = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_stand.png"));
-            standBack = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/boy_back_stand.png"));
+        up1 =setup("boy_back1");
+        up2 =setup("boy_back2");
+        down1 =setup("boy_front1");
+        down2 =setup("boy_front2");
+        left1 =setup("boy_left1");
+        left2 =setup("boy_left2");
+        right1 =setup("boy_right1");
+        right2 =setup("boy_right2");
+        standFront =setup("boy_stand");
+        standBack =setup("boy_back_stand");
+    }
 
+    public BufferedImage setup(String imageName){
+
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/" + imageName + ".png"));
+            image = utilityTool.scaleImage(image, gp.tileSize, gp.tileSize);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
+        return image;
     }
 
     public void update(){
@@ -208,7 +218,7 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image,screenX, screenY,gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image,screenX, screenY,null);
     }
 
 }
