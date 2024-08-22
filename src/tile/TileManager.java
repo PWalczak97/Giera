@@ -20,7 +20,7 @@ public class TileManager {
 
         this.gp = gp;
 
-        tile = new Tile[10];
+        tile = new Tile[50];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap("maps/map01.txt");
@@ -28,13 +28,52 @@ public class TileManager {
 
     public void getTileImage(){
 
+        //PLACEHOLDERS
         setup(0, "Grass", false);
-        setup(1, "Wall", true);
-        setup(2, "Water", true);
-        setup(3, "Dirt", false);
-        setup(4, "Sand", false);
-        setup(5, "Tree", true);
-        setup(6, "Tree_apple", true);
+        setup(1, "Grass", false);
+        setup(2, "Grass", false);
+        setup(3, "Grass", false);
+        setup(4, "Grass", false);
+        setup(5, "Grass", false);
+        setup(6, "Grass", false);
+        setup(7, "Grass", false);
+        setup(8, "Grass", false);
+        setup(9, "Grass", false);
+
+
+        setup(10, "Grass", false);
+        setup(11, "Grass2", false);
+        setup(12, "Dirt_Bot", false);
+        setup(13, "Dirt_Bot_left", false);
+        setup(14, "Dirt_Bot_Right", false);
+        setup(15, "Dirt_Corner1", false);
+        setup(16, "Dirt_Corner2", false);
+        setup(17, "Dirt_Corner3", false);
+        setup(18, "Dirt_Corner4", false);
+        setup(19, "Dirt_Left", false);
+        setup(20, "Dirt_Right", false);
+        setup(21, "Dirt_Top", false);
+        setup(22, "Dirt_Top_Left", false);
+        setup(23, "Dirt_Top_Right", false);
+        setup(24, "Dirt", false);
+        setup(25, "Sand", false);
+        setup(26, "Tree", true);
+        setup(27, "Tree_apple", true);
+        setup(28, "Wall", true);
+        setup(29, "Water", true);
+        setup(30, "Water_Top", true);
+        setup(31, "Water_Bot_Left", true);
+        setup(32, "Water_Bot_Right", true);
+        setup(33, "Water_Corner1", true);
+        setup(34, "Water_Corner2", true);
+        setup(35, "Water_Corner3", true);
+        setup(36, "Water_Corner4", true);
+        setup(37, "Water_Left", true);
+        setup(38, "Water_Right", true);
+        setup(39, "Water_Bot", true);
+        setup(40, "Water_Top_Left", true);
+        setup(41, "Water_Top_Right", true);
+
 
     }
 
