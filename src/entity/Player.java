@@ -12,16 +12,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Player extends Entity{
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenY;
     public final int screenX;
-    public int hasKeys = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
 
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -50,31 +48,16 @@ public class Player extends Entity{
 
     public void getPlayerImage(){
 
-        up1 =setup("boy_back1");
-        up2 =setup("boy_back2");
-        down1 =setup("boy_front1");
-        down2 =setup("boy_front2");
-        left1 =setup("boy_left1");
-        left2 =setup("boy_left2");
-        right1 =setup("boy_right1");
-        right2 =setup("boy_right2");
-        standFront =setup("boy_stand");
-        standBack =setup("boy_back_stand");
-    }
-
-    public BufferedImage setup(String imageName){
-
-        UtilityTool utilityTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/" + imageName + ".png"));
-            image = utilityTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return image;
+        up1 =setup("player/boy_back1");
+        up2 =setup("player/boy_back2");
+        down1 =setup("player/boy_front1");
+        down2 =setup("player/boy_front2");
+        left1 =setup("player/boy_left1");
+        left2 =setup("player/boy_left2");
+        right1 =setup("player/boy_right1");
+        right2 =setup("player/boy_right2");
+        standFront =setup("player/boy_stand");
+        standBack =setup("player/boy_back_stand");
     }
 
     public void update(){
@@ -98,6 +81,10 @@ public class Player extends Entity{
             //CHECK OBJECT COLLISION
             int objectIndex = gp.colissionCheckcer.checkObject(this, true);
             pickUpObject(objectIndex);
+
+            //CHECK NPC COLLISION
+            int npcIndex = gp.colissionCheckcer.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
 
             if(collisionOn == false){
                 switch (direction){
@@ -132,34 +119,13 @@ public class Player extends Entity{
     public void pickUpObject(int i){
 
         if(i != 999){
-            String objName = gp.obj[i].name;
 
-            switch (objName){
-                case "Key":
-                    gp.playSoundEffect(1);
-                    hasKeys++;
-                    gp.obj[i] = null;
-                    break;
-                case "Doors":
-                    if(hasKeys > 0){
-                        gp.playSoundEffect(3);
-                        gp.obj[i] = null;
-                        hasKeys--;
-                    } else {
-                        gp.ui.showMessage("Potrzebujesz klucza!");
-                    }
-                    break;
-                case "Boots":
-                    gp.playSoundEffect(2);
-                    speed += 2;
-                    gp.obj[i] = null;
-                    break;
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSoundEffect(4);
-                    break;
-            }
+        }
+    }
+
+    public void interactNPC(int i){
+        if(i != 999){
+            System.out.println("AAAAA");
         }
     }
 
