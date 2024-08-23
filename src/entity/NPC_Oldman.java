@@ -13,6 +13,7 @@ public class NPC_Oldman extends Entity{
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage(){
@@ -27,6 +28,13 @@ public class NPC_Oldman extends Entity{
         right2 =setup("npc/oldman_right2");
         standFront =setup("npc/oldman_stand");
         standBack =setup("npc/oldman_back_stand");
+    }
+
+    public void setDialogue(){
+        dialogues[0] = "Witam!";
+        dialogues[1] = "Przybyłeś odszukać skarb?";
+        dialogues[2] = "Też kiedyś byłem poszukiwaczem \nprzygód.";
+        dialogues[3] = "Ah... Stare dzieje...";
     }
 
     public void setAction(){
@@ -57,5 +65,9 @@ public class NPC_Oldman extends Entity{
 
     }
 
+    public void speak(){
+
+        super.speak();
+    }
 
 }
