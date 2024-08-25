@@ -21,6 +21,8 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
 
+    public int  commandNum = 0;
+    public int titleScreenState = 0;
 
 
     public UI(GamePanel gp){
@@ -47,6 +49,10 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.WHITE);
 
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
+
         if(gp.gameState == gp.playState){
 
         }
@@ -56,6 +62,100 @@ public class UI {
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
         }
+    }
+
+    public void drawTitleScreen(){
+
+        if(titleScreenState == 0){
+            g2.setColor(new Color(70, 120, 80));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+            String text = "Square King";
+            int x = getXForCenteredText(text);
+            int y = gp.tileSize * 3;
+
+            //SHADOW
+            g2.setColor(Color.BLACK);
+            g2.drawString(text, x+5, y+5);
+
+            //MAIN COLOR
+            g2.setColor(Color.WHITE);
+            g2.drawString(text, x, y);
+
+            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+            y += gp.tileSize*2;
+            g2.drawImage(gp.player.standFront, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+
+            text = "NOWA GRA";
+            x = getXForCenteredText(text);
+            y += gp.tileSize*3;
+            g2.drawString(text, x, y);
+            if(commandNum == 0){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "WCZYTAJ GRE";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 1){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "OPCJE";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 2){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "WYJDŹ";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 3){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+        } else if(titleScreenState == 1){
+
+
+            g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(42F));
+
+            String text = "Wybierz bohatera!";
+            int x = getXForCenteredText(text);
+            int y = gp.tileSize*3;
+            g2.drawString(text, x, y);
+
+            text = "Chłopaczyna ze Szczecina";
+            x = getXForCenteredText(text);
+            y += gp.tileSize*3;
+            g2.drawString(text, x, y);
+            if(commandNum == 0){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Pan Paweł";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 1){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Wróć";
+            x = getXForCenteredText(text);
+            y += gp.tileSize*2;
+            g2.drawString(text, x, y);
+            if(commandNum == 2){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+        }
+
     }
 
     public void  drawPauseScreen(){
