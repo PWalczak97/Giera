@@ -94,8 +94,6 @@ public class UI {
         y= gp.tileSize/2;
         i = 0;
 
-        gp.player.life = 6;
-
         //DRAW CURRENT LIFE
         while(i < gp.player.life){
             g2.drawImage(heart_half, x, y, null);

@@ -1,10 +1,7 @@
 package main;
 
 import entity.NPC_Oldman;
-import object.OBJ_Boots;
-import object.OBJ_Chest;
-import object.OBJ_Doors;
-import object.OBJ_Key;
+import object.*;
 
 public class AssetSetter {
     GamePanel gp;
@@ -22,5 +19,10 @@ public class AssetSetter {
         gp.npc[0] = new NPC_Oldman(gp);
         gp.npc[0].worldX = gp.tileSize*30;
         gp.npc[0].worldY = gp.tileSize*21;
+
+        gp.obj[1] = new OBJ_Heart(gp);
+        gp.obj[1].worldX = gp.tileSize*20;
+        gp.obj[1].worldY = gp.tileSize*21;
+
     }
 }
