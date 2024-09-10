@@ -89,6 +89,9 @@ public class Player extends Entity{
             int npcIndex = gp.colissionCheckcer.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            //CHECK MONSTER COLLISION
+            int monsterIndex = gp.colissionCheckcer.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
             //CHECK EVENT
             gp.eventHandler.checkEvent();
 
@@ -122,6 +125,24 @@ public class Player extends Entity{
             }
         }
 
+        if(invincible == true){
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
+
+    }
+
+    private void contactMonster(int i) {
+        if(i != 999){
+            if(invincible == false){
+                life -= 1;
+                invincible = true;
+            }
+
+        }
     }
 
     public void pickUpObject(int i){

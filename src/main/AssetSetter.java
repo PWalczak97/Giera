@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_Oldman;
+import monster.MON_Zombie;
 import object.*;
 
 public class AssetSetter {
@@ -24,16 +25,17 @@ public class AssetSetter {
     public void setNPC(){
 
         gp.npc[0] = new NPC_Oldman(gp);
-        gp.npc[0].worldX = gp.tileSize*30;
-        gp.npc[0].worldY = gp.tileSize*21;
+        gp.npc[0].worldX = gp.tileSize*18;
+        gp.npc[0].worldY = gp.tileSize*19;
+    }
 
-        gp.npc[1] = new NPC_Oldman(gp);
-        gp.npc[1].worldX = gp.tileSize*34;
-        gp.npc[1].worldY = gp.tileSize*23;
+    public void setMonster(){
+        gp.monster[0] = new MON_Zombie(gp);
+        gp.monster[0].worldX = gp.tileSize*32;
+        gp.monster[0].worldY = gp.tileSize*28;
 
-        gp.npc[2] = new NPC_Oldman(gp);
-        gp.npc[2].worldX = gp.tileSize*18;
-        gp.npc[2].worldY = gp.tileSize*19;
-
+        gp.monster[1] = new MON_Zombie(gp);
+        gp.monster[1].worldX = gp.tileSize*18;
+        gp.monster[1].worldY = gp.tileSize*25;
     }
 }
