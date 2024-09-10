@@ -14,18 +14,21 @@ public class Entity {
     public int speed;
 
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, standFront, standBack;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String direction = "down";
 
     public int  spriteCounter = 0;
-    public int sprintNum = 1;
+    public int spriteNum = 1;
 
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 
     public int actionLockCounter = 0;
     public boolean invincible = false;
     public int invincibleCounter = 0;
+    public boolean attacking = false;
 
     String dialogues[] = new String[20];
     int dialogueIndex = 0;
@@ -106,12 +109,20 @@ public class Entity {
 
         spriteCounter++;
         if(spriteCounter > 10){
-            if(sprintNum == 1){
-                sprintNum = 2;
-            } else if(sprintNum ==2){
-                sprintNum = 1;
+            if(spriteNum == 1){
+                spriteNum = 2;
+            } else if(spriteNum ==2){
+                spriteNum = 1;
             }
             spriteCounter = 0;
+        }
+
+        if(invincible == true){
+            invincibleCounter++;
+            if(invincibleCounter > 30){
+                invincible = false;
+                invincibleCounter = 0;
+            }
         }
     }
 
@@ -126,43 +137,48 @@ public class Entity {
 
             switch (direction){
                 case "up":
-                        if(sprintNum == 1){
+                        if(spriteNum == 1){
                             image = up1;
                         }
-                        if(sprintNum == 2){
+                        if(spriteNum == 2){
                             image = up2;
                         }
                     break;
                 case "down":
-                        if(sprintNum == 1){
+                        if(spriteNum == 1){
                             image = down1;
                         }
-                        if(sprintNum == 2){
+                        if(spriteNum == 2){
                             image = down2;
                         }
 
                     break;
                 case "left":
-                        if(sprintNum == 1){
+                        if(spriteNum == 1){
                             image = left1;
                         }
-                        if(sprintNum == 2){
+                        if(spriteNum == 2){
                             image = left2;
                         }
 
                     break;
                 case "right":
-                        if(sprintNum == 1){
+                        if(spriteNum == 1){
                             image = right1;
                         }
-                        if(sprintNum == 2){
+                        if(spriteNum == 2){
                             image = right2;
                         }
 
                     break;
             }
+            if(invincible == true){
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            }
 
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         }
     }
 
@@ -174,6 +190,21 @@ public class Entity {
         try {
             image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath + ".png"));
             image = utilityTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+
+    public BufferedImage setup(String imagePath, int width, int height){
+
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(imagePath + ".png"));
+            image = utilityTool.scaleImage(image, width, height);
         } catch (IOException e) {
             e.printStackTrace();
         }
