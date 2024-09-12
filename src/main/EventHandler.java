@@ -87,6 +87,7 @@ public class EventHandler {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "Wpadłeś w dziure";
         gp.player.life -= 1;
+        gp.playSoundEffect(5);
 
 //        eventRect[col][row].eventDone = true;
 
