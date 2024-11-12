@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -42,8 +44,26 @@ public class Player extends Entity{
         speed = 4;
         direction = "down";
 
+        level = 1;
+        strength = 1;
+        dexterity = 1;
+        exp = 0;
+        nextLevelExp = 5;
+        coin = 0;
         maxLife = 6;
         life = maxLife;
+        currentWeapon = new OBJ_Sword_Normal(gp);
+        currentShield = new OBJ_Shield_Wood(gp);
+        attack = getAttact();
+        defence = getDefence();
+    }
+
+    private int getDefence() {
+        return attack = strength * currentWeapon.attackValue;
+    }
+
+    private int getAttact() {
+        return defence = dexterity * currentShield.defenceValue;
     }
 
     public void getPlayerImage(){
@@ -74,19 +94,19 @@ public class Player extends Entity{
 
     public void update(){
 
-        if(attacking == true){
+        if(attacking){
 
             attacking();
 
-        } else if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true || keyH.spacePressed == true){
+        } else if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed || keyH.spacePressed){
 
-            if(keyH.upPressed == true){
+            if(keyH.upPressed){
                 direction = "up";
-            } else if(keyH.downPressed == true){
+            } else if(keyH.downPressed){
                 direction = "down";
-            } else if(keyH.leftPressed == true){
+            } else if(keyH.leftPressed){
                 direction = "left";
-            } else if(keyH.rightPressed == true){
+            } else if(keyH.rightPressed){
                 direction = "right";
             }
 

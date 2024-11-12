@@ -72,6 +72,9 @@ public class UI {
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
         }
+        if(gp.gameState == gp.characterState){
+            drawCharacterScreen();
+        }
     }
 
     public void drawPlayerLife(){
@@ -225,6 +228,50 @@ public class UI {
             g2.drawString(line, x, y);
             y += 40;
         }
+    }
+
+    private void drawCharacterScreen() {
+        final int frameX = gp.tileSize*2;
+        final int frameY = gp.tileSize;
+        final int frameWidth = gp.tileSize*5;
+        final int frameHeight = gp.tileSize*10;
+
+        drawSubWindow(frameX, frameY, frameWidth,frameHeight);
+
+        //TEXT
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(32F));
+
+        int textX = frameX + 20;
+        int textY = frameY + gp.tileSize;
+        final int lineHeight = 35;
+
+        //NAMES
+        g2.drawString("Level",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Life",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Strength",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Dexterity",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Attack",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Defence",textX,textY);
+        textY += lineHeight;
+        g2.drawString("EXP",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Next Level",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Coin",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Weapon",textX,textY);
+        textY += lineHeight;
+        g2.drawString("Shield",textX,textY);
+        textY += lineHeight;
+
+
+
     }
 
     public void drawSubWindow(int x, int y, int width, int height){
