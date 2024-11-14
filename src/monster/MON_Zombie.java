@@ -15,6 +15,9 @@ public class MON_Zombie extends Entity {
         speed = 1;
         maxLife = 4;
         life = maxLife;
+        attack = 5;
+        defence = 0;
+        exp = 2;
 
         getImage();
     }
