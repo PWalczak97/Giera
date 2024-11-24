@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener {
 
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed;
-    public boolean checkDrawTime = false;
+    public boolean showDebugText = false;
 
     public KeyHandler(GamePanel gp){
         this.gp = gp;
@@ -121,7 +121,19 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_SPACE){
             spacePressed = true;
         }
-    }
+
+        if(code == KeyEvent.VK_T){
+            if(showDebugText == false){
+                showDebugText = true;
+            } else if(showDebugText == true){
+                showDebugText = false;
+            }
+        }
+
+        if(code == KeyEvent.VK_R) {
+            gp.tileM.loadMap("maps/map01.txt");
+        }
+        }
 
     public void pauseState(int code){
 
